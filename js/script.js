@@ -248,3 +248,39 @@ const lyricsData = [
     }
   }
   
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("bgVideo");
+
+    // Try to play video when the page loads
+    video.play().catch(() => {
+        console.warn("Autoplay prevented by the browser. Waiting for user interaction.");
+
+        // Listen for a click or touch event to play the video
+        document.body.addEventListener("click", function () {
+            video.play();
+        }, { once: true }); // Ensures this event runs only once
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const video = document.getElementById("bgVideo");
+  const audio = document.getElementById("audio");
+
+  // Try to play video
+  video.play().catch(() => {
+      console.warn("Video autoplay blocked. Waiting for user interaction.");
+  });
+
+  // Try to play audio
+  audio.play().catch(() => {
+      console.warn("Audio autoplay blocked. Waiting for user interaction.");
+
+      // Listen for a click or touch event to play both video & audio
+      document.body.addEventListener("click", function () {
+          video.play();
+          audio.play();
+      }, { once: true }); // Ensures this event only runs once
+  });
+});
